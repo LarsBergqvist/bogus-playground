@@ -36,12 +36,12 @@ public static class FakerFactory
 
         var customerFaker = new Faker<Customer>()
             .CustomInstantiator(f => new Customer
-            {
-                Id = Guid.NewGuid(),
-                PersonIdentity = personFaker.Generate(),
-                Address = addressFaker.Generate(),
-                ContactInfo = contactInfoFaker.Generate()
-            })
+            (
+                Guid.NewGuid(),
+                personFaker.Generate(),
+                addressFaker.Generate(),
+                contactInfoFaker.Generate()
+            ))
             .FinishWith((f, c) => c.ContactInfo.Email = f.Internet.Email(c.PersonIdentity.FirstName, c.PersonIdentity.LastName));
 
         return customerFaker;
