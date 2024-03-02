@@ -16,19 +16,8 @@ public static class FakerFactory
             .CustomInstantiator(faker => 
             {
                 var person = new Person(locale);
-                var personPnr = new Person(locale);
-                // Fixup for incorrect gender handling
-                // in Bogus.Extensions.Sweden
-                if (person.Gender == Name.Gender.Male)
-                {
-                    personPnr.Gender = Name.Gender.Female;
-                }
-                else
-                {
-                    personPnr.Gender = Name.Gender.Male;
-                }
                 return new PersonIdentity(
-                    personPnr.Personnummer(),
+                    person.Personnummer(),
                     person.FirstName,
                     person.LastName
                 );
